@@ -10,7 +10,7 @@ const Footer = () => {
             <div className="flex items-center gap-2 mb-4">
               <Droplets className="w-7 h-7" />
               <span className="text-xl font-bold font-heading">
-                Aqua Relax Pool
+                Bazen Bella Vita
               </span>
             </div>
             <p className="text-primary-foreground/60 text-sm leading-relaxed">
@@ -39,7 +39,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-primary-foreground/40" />
-                info@aquarelax.ba
+                info@bellavita.ba
               </li>
               <li className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-primary-foreground/40" />
@@ -65,7 +65,7 @@ const Footer = () => {
 
         <div className="border-t border-primary-foreground/10 pt-6 text-center">
           <p className="text-xs text-primary-foreground/40">
-            © {new Date().getFullYear()} Aqua Relax Pool. Sva prava zadržana.
+            © {new Date().getFullYear()} Bazen Bella Vita. Sva prava zadržana.
           </p>
         </div>
       </div>
