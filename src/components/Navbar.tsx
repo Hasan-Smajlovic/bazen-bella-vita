@@ -40,7 +40,7 @@ const Navbar = () => {
               scrolled ? "text-foreground" : "text-primary-foreground"
             }`}
           >
-            Aqua Relax Pool
+            Bazen Bella Vita
           </span>
         </a>
 
