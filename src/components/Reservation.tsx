@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,7 +11,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Calendar } from "@/components/ui/calendar";
-import { CheckCircle, CalendarDays, Minus, Plus, Users, Clock } from "lucide-react";
+import { CheckCircle, CalendarDays, Minus, Plus, Users, Clock, AlertTriangle } from "lucide-react";
+import { toast } from "sonner";
 
 interface FormData {
   name: string;
@@ -54,9 +55,60 @@ const offerDetails: Record<string, { label: string; adultPrice: number; childPri
   },
 };
 
+const RESERVED_DATES_KEY = "bellavita_reserved_dates";
+
+function getReservedDates(): Date[] {
+  try {
+    const stored = localStorage.getItem(RESERVED_DATES_KEY);
+    if (!stored) return [];
+    const parsed: string[] = JSON.parse(stored);
+    return parsed.map((d) => new Date(d));
+  } catch {
+    return [];
+  }
+}
+
+function saveReservedDates(dates: Date[]) {
+  const strings = dates.map((d) => d.toISOString());
+  localStorage.setItem(RESERVED_DATES_KEY, JSON.stringify(strings));
+}
+
+function isSameDay(a: Date, b: Date) {
+  return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+}
+
+function getDateRange(start: Date, days: number): Date[] {
+  const range: Date[] = [];
+  for (let i = 0; i < days; i++) {
+    const d = new Date(start);
+    d.setDate(d.getDate() + i);
+    range.push(d);
+  }
+  return range;
+}
+
+const CalendarLegend = () => (
+  <div className="flex flex-wrap gap-4 justify-center mb-4 text-xs font-medium">
+    <div className="flex items-center gap-1.5">
+      <span className="w-4 h-4 rounded-full bg-red-500/80 inline-block border border-red-600" />
+      <span className="text-muted-foreground">Rezervisano</span>
+    </div>
+    <div className="flex items-center gap-1.5">
+      <span className="w-4 h-4 rounded-full bg-orange-300 inline-block border border-orange-400" />
+      <span className="text-muted-foreground">Odabrano</span>
+    </div>
+    <div className="flex items-center gap-1.5">
+      <span className="w-4 h-4 rounded-full bg-emerald-400 inline-block border border-emerald-500" />
+      <span className="text-muted-foreground">Potvrđeno</span>
+    </div>
+  </div>
+);
+
 const Reservation = () => {
-  const [date, setDate] = useState<Date | undefined>();
+  const [startDate, setStartDate] = useState<Date | undefined>();
   const [submitted, setSubmitted] = useState(false);
+  const [justConfirmed, setJustConfirmed] = useState<Date[]>([]);
+  const [reservedDates, setReservedDates] = useState<Date[]>(getReservedDates);
   const [form, setForm] = useState<FormData>({
     name: "",
     phone: "",
@@ -69,6 +121,17 @@ const Reservation = () => {
   });
 
   const selectedOffer = form.offer ? offerDetails[form.offer] : null;
+
+  // Compute selected range from start date + days
+  const selectedRange = useMemo(() => {
+    if (!startDate) return [];
+    return getDateRange(startDate, form.days);
+  }, [startDate, form.days]);
+
+  // Check if any selected date overlaps reserved
+  const hasConflict = useMemo(() => {
+    return selectedRange.some((sd) => reservedDates.some((rd) => isSameDay(sd, rd)));
+  }, [selectedRange, reservedDates]);
 
   const calculateTotal = () => {
     if (!selectedOffer) return 0;
@@ -86,10 +149,39 @@ const Reservation = () => {
     }));
   };
 
+  const handleDateSelect = (d: Date | undefined) => {
+    if (!d) return;
+    // Check if clicking on a reserved date
+    if (reservedDates.some((rd) => isSameDay(rd, d))) {
+      toast.error("Ovaj datum je već rezervisan!", {
+        description: "Molimo odaberite drugi slobodan datum.",
+        icon: <AlertTriangle className="w-5 h-5" />,
+      });
+      return;
+    }
+    setStartDate(d);
+    setJustConfirmed([]);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!date || !form.name || !form.phone || !form.email || !form.offer || form.adults < 1)
+    if (!startDate || !form.name || !form.phone || !form.email || !form.offer || form.adults < 1) return;
+
+    if (hasConflict) {
+      toast.error("Neki od odabranih dana su već rezervisani!", {
+        description: "Molimo odaberite druge datume ili smanjite broj dana.",
+      });
       return;
+    }
+
+    // Mark selected range as confirmed (green)
+    setJustConfirmed([...selectedRange]);
+
+    // Persist to reserved dates
+    const newReserved = [...reservedDates, ...selectedRange];
+    setReservedDates(newReserved);
+    saveReservedDates(newReserved);
+
     setSubmitted(true);
   };
 
@@ -103,22 +195,48 @@ const Reservation = () => {
     });
   };
 
+  // Custom modifiers for the calendar
+  const modifiers = useMemo(() => ({
+    reserved: reservedDates,
+    selectedRange: selectedRange.filter((sd) => !reservedDates.some((rd) => isSameDay(sd, rd))),
+    confirmed: justConfirmed,
+  }), [reservedDates, selectedRange, justConfirmed]);
+
+  const modifiersStyles = {
+    reserved: {
+      backgroundColor: "rgba(239, 68, 68, 0.7)",
+      color: "white",
+      borderRadius: "9999px",
+      cursor: "not-allowed",
+    },
+    selectedRange: {
+      backgroundColor: "rgba(251, 191, 36, 0.5)",
+      color: "#92400e",
+      borderRadius: "9999px",
+    },
+    confirmed: {
+      backgroundColor: "rgba(52, 211, 153, 0.7)",
+      color: "white",
+      borderRadius: "9999px",
+    },
+  };
+
   if (submitted) {
     return (
       <section id="reservation" className="section-padding water-shimmer">
         <div className="container mx-auto max-w-lg">
           <div className="bg-card rounded-3xl p-10 shadow-card text-center animate-fade-in-up">
-            <CheckCircle className="w-16 h-16 text-primary mx-auto mb-6" />
+            <CheckCircle className="w-16 h-16 text-emerald-500 mx-auto mb-6" />
             <h2 className="text-2xl font-bold font-heading text-foreground mb-4">
               Rezervacija potvrđena!
             </h2>
             <div className="space-y-2 text-muted-foreground mb-6 text-left">
               <p><strong>Ime:</strong> {form.name}</p>
-              <p><strong>Datum:</strong> {date?.toLocaleDateString("bs-BA")}</p>
+              <p><strong>Datum početka:</strong> {startDate?.toLocaleDateString("bs-BA")}</p>
+              {form.days > 1 && <p><strong>Broj dana:</strong> {form.days}</p>}
               <p><strong>Odrasli:</strong> {form.adults}</p>
               {form.children > 0 && <p><strong>Djeca:</strong> {form.children}</p>}
               <p><strong>Paket:</strong> {selectedOffer?.label}</p>
-              {selectedOffer && selectedOffer.perDay && <p><strong>Broj dana:</strong> {form.days}</p>}
               <p className="text-lg font-bold text-foreground mt-4"><strong>Ukupno:</strong> {calculateTotal()} KM</p>
             </div>
             <div className="bg-muted rounded-xl p-4">
@@ -131,8 +249,9 @@ const Reservation = () => {
               className="mt-6 rounded-full"
               onClick={() => {
                 setSubmitted(false);
+                setJustConfirmed([]);
                 setForm({ name: "", phone: "", email: "", adults: 1, children: 0, offer: "", days: 1, message: "" });
-                setDate(undefined);
+                setStartDate(undefined);
               }}
             >
               Nova rezervacija
@@ -161,25 +280,35 @@ const Reservation = () => {
         <div className="grid md:grid-cols-2 gap-8">
           {/* Calendar */}
           <div className="bg-card rounded-3xl p-6 md:p-8 shadow-card flex flex-col items-center">
-            <div className="flex items-center gap-2 mb-6">
+            <div className="flex items-center gap-2 mb-4">
               <CalendarDays className="w-5 h-5 text-primary" />
               <h3 className="font-heading font-semibold text-foreground">
                 Odaberite datum
               </h3>
             </div>
+            <CalendarLegend />
             <Calendar
               mode="single"
-              selected={date}
-              onSelect={setDate}
+              selected={startDate}
+              onSelect={handleDateSelect}
               disabled={(d) => d < new Date(new Date().setHours(0, 0, 0, 0))}
+              modifiers={modifiers}
+              modifiersStyles={modifiersStyles}
               className="pointer-events-auto rounded-xl"
             />
-            {date && (
+            {startDate && !hasConflict && (
               <p className="mt-4 text-sm text-primary font-medium">
-                Odabrano: {date.toLocaleDateString("bs-BA")}
+                Odabrano: {startDate.toLocaleDateString("bs-BA")}
+                {form.days > 1 && ` — ${form.days} dana`}
               </p>
             )}
-            {!date && (
+            {hasConflict && (
+              <p className="mt-4 text-sm text-destructive font-medium flex items-center gap-1">
+                <AlertTriangle className="w-4 h-4" />
+                Neki odabrani dani su već rezervisani!
+              </p>
+            )}
+            {!startDate && (
               <p className="mt-4 text-sm text-muted-foreground">
                 Molimo odaberite slobodan datum.
               </p>
@@ -331,7 +460,7 @@ const Reservation = () => {
               type="submit"
               variant="accent"
               className="w-full rounded-full py-6 text-base"
-              disabled={!date || !form.offer}
+              disabled={!startDate || !form.offer || hasConflict}
             >
               Potvrdi rezervaciju
             </Button>
