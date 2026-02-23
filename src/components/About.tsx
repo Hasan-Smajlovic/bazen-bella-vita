@@ -36,7 +36,7 @@ const About = () => {
           </p>
         </div>
 
-        {/* Info cards */}
+        {/* Info cards  */} 
         <div className="grid md:grid-cols-3 gap-6 mb-16">
           <div className="bg-card rounded-2xl p-8 shadow-card text-center hover:shadow-glow transition-shadow duration-500">
             <Waves className="w-10 h-10 text-primary mx-auto mb-4" />
