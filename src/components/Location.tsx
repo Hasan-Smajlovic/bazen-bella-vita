@@ -19,7 +19,7 @@ const Location = () => {
           <div className="rounded-3xl overflow-hidden shadow-card h-80 md:h-auto min-h-[320px]">
             <iframe
               title="Lokacija bazena"
-              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d20715.21336074374!2d18.16065523476563!3d44.76348010000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDTCsDQ1JzQ4LjUiTiAxOMKwMTAnNTIuNSJF!5e1!3m2!1sbs!2sba!4v1771830227821!5m2!1sbs!2sba"
+              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d20715.21336074374!2d18.16065523476563!3d44.76348010000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDTCsDQ1JzQ4LjUiTiAxOMKwMTAnNTIuNSJF!5e0!3m2!1sbs!2sba!4v1771831658184!5m2!1sbs!2sba"
               className="w-full h-full border-0"
               allowFullScreen
               loading="lazy"
