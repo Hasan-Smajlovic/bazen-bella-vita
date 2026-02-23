@@ -10,7 +10,7 @@ const Footer = () => {
             <div className="flex items-center gap-2 mb-4">
               <Droplets className="w-7 h-7" />
               <span className="text-xl font-bold font-heading">
-                Bazen Bella Vita
+                Bazen Bella Vita Apartmani
               </span>
             </div>
             <p className="text-primary-foreground/60 text-sm leading-relaxed">
@@ -48,13 +48,15 @@ const Footer = () => {
             </ul>
             <div className="flex gap-3 mt-4">
               <a
-                href="#"
+              title="facebook"
+                href="https://www.facebook.com/profile.php?id=61579574523477"
                 className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary transition-colors duration-300"
               >
                 <Facebook className="w-4 h-4" />
               </a>
               <a
-                href="#"
+                title="instagram"
+                href="https://www.instagram.com/bazenbellavita/"
                 className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary transition-colors duration-300"
               >
                 <Instagram className="w-4 h-4" />

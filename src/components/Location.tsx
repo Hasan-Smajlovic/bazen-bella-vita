@@ -19,7 +19,7 @@ const Location = () => {
           <div className="rounded-3xl overflow-hidden shadow-card h-80 md:h-auto min-h-[320px]">
             <iframe
               title="Lokacija bazena"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2875.123456789!2d17.8081!3d43.3438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDPCsDIwJzM3LjciTiAxN8KwNDgnMjkuMiJF!5e0!3m2!1sbs!2sba!4v1700000000000"
+              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d20715.21336074374!2d18.16065523476563!3d44.76348010000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDTCsDQ1JzQ4LjUiTiAxOMKwMTAnNTIuNSJF!5e1!3m2!1sbs!2sba!4v1771830227821!5m2!1sbs!2sba"
               className="w-full h-full border-0"
               allowFullScreen
               loading="lazy"
@@ -66,21 +66,23 @@ const Location = () => {
 
             {/* Social */}
             <div className="flex gap-3 mt-8">
-              <a
-                href="#"
+              <a 
+                title="facebook"
+                href="https://www.facebook.com/profile.php?id=61579574523477"
                 className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground text-primary transition-all duration-300"
               >
                 <Facebook className="w-5 h-5" />
               </a>
-              <a
-                href="#"
+              <a 
+                title="home"
+                href="https://www.instagram.com/bazenbellavita/"
                 className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground text-primary transition-all duration-300"
               >
                 <Instagram className="w-5 h-5" />
               </a>
             </div>
 
-            <a href="https://maps.google.com" target="_blank" rel="noreferrer" className="mt-8">
+            <a href="https://maps.app.goo.gl/ATi9AVwXTrKEFuGy5" target="_blank" rel="noopener noreferrer" className="mt-8">
               <Button variant="default" className="rounded-full">
                 <MapPin className="w-4 h-4 mr-2" />
                 Pronađi nas
@@ -94,3 +96,9 @@ const Location = () => {
 };
 
 export default Location;
+
+
+
+
+
+

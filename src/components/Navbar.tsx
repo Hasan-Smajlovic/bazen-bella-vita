@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Droplets } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Početna", href: "#home" },
@@ -29,11 +29,11 @@ const Navbar = () => {
       }`}
     >
       <div className="container mx-auto flex items-center justify-between py-4">
-        <a href="#home" className="flex items-center gap-2 group">
-          <Droplets
-            className={`w-8 h-8 transition-colors duration-300 ${
-              scrolled ? "text-primary" : "text-primary-foreground"
-            }`}
+        <a href="#home" className="flex items-center gap-3 group">
+          <img 
+            src="/src/assets/logo.jpg" 
+            alt="Bazen Bella Vita Logo" 
+            className="w-12 h-12 transition-transform duration-300 group-hover:scale-105"
           />
           <span
             className={`text-xl font-bold font-heading transition-colors duration-300 ${
