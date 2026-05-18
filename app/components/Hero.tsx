@@ -37,7 +37,8 @@ const Hero = () => {
           className="text-primary-foreground/80 text-lg md:text-xl mb-10 animate-fade-in-up"
           style={{ animationDelay: "0.6s" }}
         >
-          Zaronite u kristalno čistu vodu i uživajte u luksuznom okruženju za savršen odmor.
+          Zaronite u kristalno čistu vodu i uživajte u luksuznom okruženju za
+          savršen odmor.
         </p>
         <div
           className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up"
@@ -49,7 +50,11 @@ const Hero = () => {
             </Button>
           </a>
           <a href="#about">
-            <Button variant="outline-light" size="lg" className="px-10 py-6 text-lg">
+            <Button
+              variant="outline-light"
+              size="lg"
+              className="px-10 py-6 text-lg"
+            >
               Saznaj više
             </Button>
           </a>

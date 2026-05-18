@@ -50,7 +50,9 @@ const Location = () => {
                 </div>
                 <div>
                   <p className="font-medium text-foreground">Telefon</p>
-                  <p className="text-muted-foreground text-sm">+387 36 123 456</p>
+                  <p className="text-muted-foreground text-sm">
+                    +387 36 123 456
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -59,21 +61,23 @@ const Location = () => {
                 </div>
                 <div>
                   <p className="font-medium text-foreground">Email</p>
-                  <p className="text-muted-foreground text-sm">info@aquarelax.ba</p>
+                  <p className="text-muted-foreground text-sm">
+                    info@aquarelax.ba
+                  </p>
                 </div>
               </div>
             </div>
 
             {/* Social */}
             <div className="flex gap-3 mt-8">
-              <a 
+              <a
                 title="facebook"
                 href="https://www.facebook.com/profile.php?id=61579574523477"
                 className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground text-primary transition-all duration-300"
               >
                 <Facebook className="w-5 h-5" />
               </a>
-              <a 
+              <a
                 title="home"
                 href="https://www.instagram.com/bazenbellavita/"
                 className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center hover:bg-primary hover:text-primary-foreground text-primary transition-all duration-300"
@@ -82,7 +86,12 @@ const Location = () => {
               </a>
             </div>
 
-            <a href="https://maps.app.goo.gl/ATi9AVwXTrKEFuGy5" target="_blank" rel="noopener noreferrer" className="mt-8">
+            <a
+              href="https://maps.app.goo.gl/ATi9AVwXTrKEFuGy5"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8"
+            >
               <Button variant="default" className="rounded-full">
                 <MapPin className="w-4 h-4 mr-2" />
                 Pronađi nas
@@ -96,9 +105,3 @@ const Location = () => {
 };
 
 export default Location;
-
-
-
-
-
-

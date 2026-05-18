@@ -61,6 +61,4 @@ This project is built with:
 - `tests/` contains the Vitest setup and test files
 - `public/` contains static assets served as-is
 
-
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-

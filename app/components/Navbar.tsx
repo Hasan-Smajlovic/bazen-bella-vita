@@ -24,9 +24,7 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "bg-card/95 backdrop-blur-md shadow-soft"
-          : "bg-transparent"
+        scrolled ? "bg-card/95 backdrop-blur-md shadow-soft" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto flex items-center justify-between py-4">
@@ -45,7 +43,7 @@ const Navbar = () => {
           </span>
         </a>
 
-        {/* Desktop */} 
+        {/* Desktop */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <a

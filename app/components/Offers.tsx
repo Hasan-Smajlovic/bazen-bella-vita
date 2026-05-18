@@ -17,7 +17,8 @@ const offers = [
   },
   {
     title: "Vikend Relax Paket",
-    description: "2-dnevni pristup bazenu sa svim pogodnostima po sniženoj cijeni.",
+    description:
+      "2-dnevni pristup bazenu sa svim pogodnostima po sniženoj cijeni.",
     priceAdult: "25 KM",
     priceChild: "14 KM",
     oldPrice: "30 KM",
@@ -29,7 +30,8 @@ const offers = [
   },
   {
     title: "Apartman + Pool Paket",
-    description: "2–5 dana boravka u luksuznom apartmanu + neograničen pristup bazenu.",
+    description:
+      "2–5 dana boravka u luksuznom apartmanu + neograničen pristup bazenu.",
     priceAdult: "120 KM",
     priceChild: null,
     oldPrice: "160 KM",

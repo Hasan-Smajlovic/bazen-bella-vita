@@ -1,4 +1,11 @@
-import { Droplets, Phone, Mail, MapPin, Facebook, Instagram } from "lucide-react";
+import {
+  Droplets,
+  Phone,
+  Mail,
+  MapPin,
+  Facebook,
+  Instagram,
+} from "lucide-react";
 
 const Footer = () => {
   return (
@@ -14,8 +21,8 @@ const Footer = () => {
               </span>
             </div>
             <p className="text-primary-foreground/60 text-sm leading-relaxed">
-              Vaša oaza za odmor i opuštanje. Kristalno čista voda i
-              nezaboravno ljeto.
+              Vaša oaza za odmor i opuštanje. Kristalno čista voda i nezaboravno
+              ljeto.
             </p>
           </div>
 
@@ -25,7 +32,9 @@ const Footer = () => {
             <ul className="space-y-2 text-sm text-primary-foreground/60">
               <li>Ponedjeljak – Petak: 08:00 – 20:00</li>
               <li>Subota – Nedjelja: 07:00 – 21:00</li>
-              <li className="text-accent font-medium">Sezona: Juni – Septembar</li>
+              <li className="text-accent font-medium">
+                Sezona: Juni – Septembar
+              </li>
             </ul>
           </div>
 
@@ -48,7 +57,7 @@ const Footer = () => {
             </ul>
             <div className="flex gap-3 mt-4">
               <a
-              title="facebook"
+                title="facebook"
                 href="https://www.facebook.com/profile.php?id=61579574523477"
                 className="w-9 h-9 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-primary transition-colors duration-300"
               >

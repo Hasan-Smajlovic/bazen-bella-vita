@@ -14,12 +14,18 @@ const itemStyle =
 
 const Reservation = () => {
   return (
-    <section id="reservation" className="section-padding bg-background water-shimmer">
+    <section
+      id="reservation"
+      className="section-padding bg-background water-shimmer"
+    >
       <div className="container mx-auto max-w-6xl">
         <div className="text-center mb-20">
-          <p className="text-accent font-semibold tracking-widest uppercase text-sm mb-4">Rezervacija</p>
+          <p className="text-accent font-semibold tracking-widest uppercase text-sm mb-4">
+            Rezervacija
+          </p>
           <h2 className="text-3xl md:text-5xl font-bold font-heading text-foreground mb-8">
-            Rezervišite svoje mjesto u našem <span className="text-gradient">raju</span>
+            Rezervišite svoje mjesto u našem{" "}
+            <span className="text-gradient">raju</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed mb-8">
             Sve rezervacije se vrše putem DM poruka na našim društvenim mrežama.
@@ -30,7 +36,9 @@ const Reservation = () => {
               variant="outline"
               size="lg"
               className="rounded-full px-8 py-3 font-medium text-white bg-blue-500 hover:bg-blue-600 hover:border-blue-600 hover:text-white transition-all duration-300 hover:scale-105 hover:shadow-lg group"
-              onClick={() => window.open("https://www.facebook.com/bazenbellavita", "_blank")}
+              onClick={() =>
+                window.open("https://www.facebook.com/bazenbellavita", "_blank")
+              }
             >
               <Facebook className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
               Facebook
@@ -39,7 +47,12 @@ const Reservation = () => {
               variant="outline"
               size="lg"
               className="rounded-full px-8 py-3 font-semibold bg-gradient-to-r from-purple-500 to-pink-500 text-white transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl active:scale-95"
-              onClick={() => window.open("https://www.instagram.com/bazen_bella_vita/", "_blank")}
+              onClick={() =>
+                window.open(
+                  "https://www.instagram.com/bazen_bella_vita/",
+                  "_blank",
+                )
+              }
             >
               <Instagram className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
               Instagram
@@ -57,11 +70,16 @@ const Reservation = () => {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div className="bg-card/80 backdrop-blur-sm rounded-3xl p-8 md:p-10 shadow-2xl border border-border/20 hover:shadow-3xl transition-all duration-500">
-                <h3 className="text-lg font-semibold text-foreground mb-6 text-center">Osnovne informacije</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-6 text-center">
+                  Osnovne informacije
+                </h3>
                 <div className="space-y-4">
                   <div className={itemStyle}>
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <Users size={20} className="text-primary group-hover:scale-110 transition-transform" />
+                      <Users
+                        size={20}
+                        className="text-primary group-hover:scale-110 transition-transform"
+                      />
                     </div>
                     <span className="font-medium text-foreground group-hover:text-primary transition-colors">
                       Ime i prezime
@@ -70,7 +88,10 @@ const Reservation = () => {
 
                   <div className={itemStyle}>
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <Phone size={20} className="text-primary group-hover:scale-110 transition-transform" />
+                      <Phone
+                        size={20}
+                        className="text-primary group-hover:scale-110 transition-transform"
+                      />
                     </div>
                     <span className="font-medium text-foreground group-hover:text-primary transition-colors">
                       Broj telefona
@@ -79,7 +100,10 @@ const Reservation = () => {
 
                   <div className={itemStyle}>
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <Users size={20} className="text-primary group-hover:scale-110 transition-transform" />
+                      <Users
+                        size={20}
+                        className="text-primary group-hover:scale-110 transition-transform"
+                      />
                     </div>
                     <span className="font-medium text-foreground group-hover:text-primary transition-colors">
                       Broj odraslih i djece
@@ -89,11 +113,16 @@ const Reservation = () => {
               </div>
 
               <div className="bg-card/80 backdrop-blur-sm rounded-3xl p-8 md:p-10 shadow-2xl border border-border/20 hover:shadow-3xl transition-all duration-500">
-                <h3 className="text-lg font-semibold text-foreground mb-6 text-center">Detalji rezervacije</h3>
+                <h3 className="text-lg font-semibold text-foreground mb-6 text-center">
+                  Detalji rezervacije
+                </h3>
                 <div className="space-y-4">
                   <div className={itemStyle}>
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <CalendarDays size={20} className="text-primary group-hover:scale-110 transition-transform" />
+                      <CalendarDays
+                        size={20}
+                        className="text-primary group-hover:scale-110 transition-transform"
+                      />
                     </div>
                     <span className="font-medium text-foreground group-hover:text-primary transition-colors">
                       Datum rezervacije
@@ -102,7 +131,10 @@ const Reservation = () => {
 
                   <div className={itemStyle}>
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                      <Clock size={20} className="text-primary group-hover:scale-110 transition-transform" />
+                      <Clock
+                        size={20}
+                        className="text-primary group-hover:scale-110 transition-transform"
+                      />
                     </div>
                     <span className="font-medium text-foreground group-hover:text-primary transition-colors">
                       Trajanje boravka
@@ -117,7 +149,8 @@ const Reservation = () => {
             <div className="inline-flex items-center gap-3 bg-gradient-to-r from-accent/10 to-primary/10 rounded-2xl px-6 py-4 border border-accent/20">
               <span className="text-2xl">💰</span>
               <p className="text-foreground font-medium">
-                Informacije o plaćanju bit će Vam dostavljene u odgovoru na poruku. Hvala na povjerenju i dobro nam došli!
+                Informacije o plaćanju bit će Vam dostavljene u odgovoru na
+                poruku. Hvala na povjerenju i dobro nam došli!
               </p>
             </div>
           </div>
