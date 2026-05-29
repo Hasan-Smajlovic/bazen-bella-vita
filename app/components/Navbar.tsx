@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
-import logoImg from "@/assets/logo.jpg";
+import logoImg from "@/assets/logo-transparent.webp";
 
 const navLinks = [
   { label: "Početna", href: "#home" },
@@ -14,6 +14,7 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -21,26 +22,52 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const handlePointerDown = (event: MouseEvent) => {
+      if (!mobileMenuRef.current?.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handlePointerDown);
+      document.addEventListener("keydown", handleEscape);
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleEscape);
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
+
+  const navLinkClass =
+    "group relative inline-flex items-center py-2 text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent hover:opacity-85";
+
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled ? "bg-card/95 backdrop-blur-md shadow-soft" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-card/95 backdrop-blur-xl shadow-soft border-b border-border/60"
+          : "bg-primary/12 backdrop-blur-md border-b border-white/20 shadow-[0_10px_30px_-25px_hsl(var(--primary)/0.5)]"
       }`}
     >
-      <div className="container mx-auto flex items-center justify-between py-4">
+      <div className="container mx-auto flex items-center justify-between py-3 sm:py-4">
         <a href="#home" className="flex items-center gap-3 group">
           <img
             src={logoImg}
-            alt="Bazen Bella Vita Logo"
-            className="w-12 h-12 transition-transform duration-300 group-hover:scale-105"
+            alt="Bazen Bella Vita Apartmani Logo"
+            width={240}
+            height={160}
+            className="w-[90px] h-[60px] sm:w-[108px] sm:h-[72px] md:w-[126px] md:h-[84px]"
           />
-          <span
-            className={`text-xl font-bold font-heading transition-colors duration-300 ${
-              scrolled ? "text-foreground" : "text-primary-foreground"
-            }`}
-          >
-            Bazen Bella Vita
-          </span>
         </a>
 
         {/* Desktop */}
@@ -49,15 +76,18 @@ const Navbar = () => {
             <a
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors duration-300 hover:text-accent ${
+              className={`${navLinkClass} ${
                 scrolled ? "text-foreground" : "text-primary-foreground"
               }`}
             >
-              {link.label}
+              <span className="relative">
+                {link.label}
+                <span className="absolute -bottom-2 left-0 h-[2px] w-full origin-left scale-x-0 rounded-full bg-current transition-transform duration-300 group-hover:scale-x-100 group-focus-visible:scale-x-100" />
+              </span>
             </a>
           ))}
           <a href="#reservation">
-            <Button variant="accent" size="sm" className="rounded-full">
+            <Button variant="reservation" size="sm" className="px-5">
               Rezerviši termin
             </Button>
           </a>
@@ -66,36 +96,55 @@ const Navbar = () => {
         {/* Mobile toggle */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className={`md:hidden transition-colors ${
+          aria-label={isOpen ? "Zatvori meni" : "Otvori meni"}
+          aria-haspopup="menu"
+          className={`md:hidden inline-flex items-center justify-center rounded-full p-2 transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/60 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
             scrolled ? "text-foreground" : "text-primary-foreground"
           }`}
         >
-          {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <span
+            className={`transition-transform duration-300 ${isOpen ? "rotate-90" : "rotate-0"}`}
+          >
+            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </span>
         </button>
       </div>
 
       {/* Mobile menu */}
-      {isOpen && (
-        <div className="md:hidden bg-card/98 backdrop-blur-lg border-t border-border animate-fade-in-up">
-          <div className="container mx-auto py-4 flex flex-col gap-3">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="text-foreground font-medium py-2 hover:text-primary transition-colors"
-              >
-                {link.label}
-              </a>
-            ))}
-            <a href="#reservation" onClick={() => setIsOpen(false)}>
-              <Button variant="accent" className="w-full rounded-full mt-2">
-                Rezerviši termin
-              </Button>
+      <div
+        ref={mobileMenuRef}
+        className={`md:hidden origin-top overflow-hidden border-t backdrop-blur-lg transition-all duration-300 ease-out ${
+          isOpen
+            ? "max-h-96 translate-y-0 opacity-100"
+            : "pointer-events-none max-h-0 -translate-y-2 opacity-0"
+        } ${
+          scrolled
+            ? "bg-card/95 border-border"
+            : "bg-primary/12 border-white/20"
+        }`}
+      >
+        <div className="container mx-auto py-4 flex flex-col">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={() => setIsOpen(false)}
+              className={`group flex items-center justify-between py-4 border-b transition-all duration-300 ${
+                scrolled
+                  ? "text-foreground border-border hover:text-accent hover:pl-2"
+                  : "text-primary-foreground border-white/15 hover:text-accent hover:pl-2"
+              }`}
+            >
+              <span className="font-medium tracking-wide">{link.label}</span>
             </a>
-          </div>
+          ))}
+          <a href="#reservation" onClick={() => setIsOpen(false)}>
+            <Button variant="reservation" className="w-full mt-4 px-6">
+              Rezerviši termin
+            </Button>
+          </a>
         </div>
-      )}
+      </div>
     </nav>
   );
 };

@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["ES2023"],
+    "lib": ["ES2022"],
     "module": "ESNext",
+    "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
 
     /* Bundler mode */

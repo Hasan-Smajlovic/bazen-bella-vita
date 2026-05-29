@@ -7,6 +7,8 @@ import {
   Instagram,
 } from "lucide-react";
 
+import LogoImg from "@/assets/logo-transparent.webp";
+
 const Footer = () => {
   return (
     <footer className="bg-foreground text-primary-foreground">
@@ -14,9 +16,15 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-8 mb-10">
           {/* Brand */}
           <div>
-            <div className="flex items-center gap-2 mb-4">
-              <Droplets className="w-7 h-7" />
-              <span className="text-xl font-bold font-heading">
+            <div className="flex items-start gap-4 mb-4">
+              <img
+                src={LogoImg}
+                alt="logo"
+                width={240}
+                height={160}
+                className="w-[90px] h-[60px] sm:w-[108px] sm:h-[72px] md:w-[126px] md:h-[84px]"
+              />
+              <span className="text-lg sm:text-xl font-bold font-heading">
                 Bazen Bella Vita Apartmani
               </span>
             </div>
@@ -76,7 +84,8 @@ const Footer = () => {
 
         <div className="border-t border-primary-foreground/10 pt-6 text-center">
           <p className="text-xs text-primary-foreground/40">
-            © {new Date().getFullYear()} Bazen Bella Vita. Sva prava zadržana.
+            © {new Date().getFullYear()} Bazen Bella Vita Apartmani. Sva prava
+            zadržana.
           </p>
         </div>
       </div>

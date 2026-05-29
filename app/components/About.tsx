@@ -7,6 +7,7 @@ import {
   Clock,
   Wine,
   Armchair,
+  BedDouble,
 } from "lucide-react";
 
 const amenities = [
@@ -16,6 +17,7 @@ const amenities = [
   { icon: ShowerHead, label: "Tuševi" },
   { icon: Car, label: "Parking" },
   { icon: Clock, label: "Svlačionice" },
+  { icon: BedDouble, label: "Apartmani" },
 ];
 
 const About = () => {
@@ -30,9 +32,9 @@ const About = () => {
             Vaša oaza za <span className="text-gradient">opuštanje</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed">
-            Naš bazen pruža savršen bijeg od svakodnevice. Kristalno čista voda,
-            udobne ležaljke i opuštajuća atmosfera čine idealno mjesto za vaš
-            odmor.
+            Naš bazen i apartmani pružaju savršen bijeg od svakodnevice.
+            Kristalno čista voda, udobne ležaljke, prelijepi apartmani i
+            opuštajuća atmosfera čine idealno mjesto za vaš odmor.
           </p>
         </div>
 
@@ -68,16 +70,16 @@ const About = () => {
         {/* Amenities */}
         <div className="bg-card rounded-3xl p-8 md:p-12 shadow-card">
           <h3 className="font-heading font-semibold text-foreground text-xl mb-8 text-center">
-            Sadržaji
+            Sadržaji i apartmani
           </h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          <div className="flex flex-wrap lg:flex-nowrap justify-center gap-4 sm:gap-6 lg:gap-10">
             {amenities.map((item) => (
               <div
                 key={item.label}
-                className="flex flex-col items-center gap-3 p-4 rounded-xl hover:bg-muted transition-colors duration-300 group"
+                className="flex flex-col items-center gap-2 p-3 sm:p-4 rounded-xl hover:bg-muted transition-colors duration-300 group shrink-0"
               >
-                <item.icon className="w-8 h-8 text-primary group-hover:text-accent transition-colors duration-300" />
-                <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">
+                <item.icon className="w-8 h-8 sm:w-9 sm:h-9 text-primary group-hover:text-accent transition-colors duration-300" />
+                <span className="text-sm sm:text-base font-medium text-muted-foreground group-hover:text-foreground transition-colors">
                   {item.label}
                 </span>
               </div>

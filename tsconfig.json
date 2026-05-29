@@ -9,6 +9,8 @@
     "paths": {
       "@/*": ["./app/*"]
     },
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
     "noImplicitAny": false,
     "noUnusedParameters": false,
     "skipLibCheck": true,

@@ -28,16 +28,19 @@ const Reservation = () => {
             <span className="text-gradient">raju</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto text-lg leading-relaxed mb-8">
-            Sve rezervacije se vrše putem DM poruka na našim društvenim mrežama.
+            Sve rezervacije se vrše putem DM poruka na Instagramu i Facebooku.
           </p>
 
-          <div className="flex justify-center gap-6">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 sm:gap-6">
             <Button
               variant="outline"
               size="lg"
-              className="rounded-full px-8 py-3 font-medium text-white bg-blue-500 hover:bg-blue-600 hover:border-blue-600 hover:text-white transition-all duration-300 hover:scale-105 hover:shadow-lg group"
+              className="rounded-full px-6 sm:px-8 py-3 font-medium text-white bg-blue-500 hover:bg-blue-600 hover:border-blue-600 hover:text-white transition-all duration-300 hover:scale-105 hover:shadow-lg group"
               onClick={() =>
-                window.open("https://www.facebook.com/bazenbellavita", "_blank")
+                window.open(
+                  "https://www.facebook.com/profile.php?id=61579574523477 ",
+                  "_blank",
+                )
               }
             >
               <Facebook className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
@@ -46,10 +49,10 @@ const Reservation = () => {
             <Button
               variant="outline"
               size="lg"
-              className="rounded-full px-8 py-3 font-semibold bg-gradient-to-r from-purple-500 to-pink-500 text-white transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl active:scale-95"
+              className="rounded-full px-6 sm:px-8 py-3 font-semibold bg-gradient-to-r from-purple-500 to-pink-500 text-white transition-all duration-300 ease-out hover:scale-105 hover:shadow-xl active:scale-95"
               onClick={() =>
                 window.open(
-                  "https://www.instagram.com/bazen_bella_vita/",
+                  "https://www.instagram.com/bazenbellavita/",
                   "_blank",
                 )
               }
@@ -106,7 +109,7 @@ const Reservation = () => {
                       />
                     </div>
                     <span className="font-medium text-foreground group-hover:text-primary transition-colors">
-                      Broj odraslih i djece
+                      Broj osoba
                     </span>
                   </div>
                 </div>
@@ -117,6 +120,18 @@ const Reservation = () => {
                   Detalji rezervacije
                 </h3>
                 <div className="space-y-4">
+                  <div className={itemStyle}>
+                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                      <MessageCircle
+                        size={20}
+                        className="text-primary group-hover:scale-110 transition-transform"
+                      />
+                    </div>
+                    <span className="font-medium text-foreground group-hover:text-primary transition-colors">
+                      Odabrani paket
+                    </span>
+                  </div>
+
                   <div className={itemStyle}>
                     <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
                       <CalendarDays

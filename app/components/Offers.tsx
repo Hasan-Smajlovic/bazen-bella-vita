@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import gallery1 from "@/assets/gallery-1.jpg";
-import gallery4 from "@/assets/gallery-4.jpg";
-import offerApartment from "@/assets/offer-apartment.jpg";
+import gallery1 from "@/assets/slika-1.jpg";
+import gallery4 from "@/assets/slika-2.jpg";
+import offerApartment from "@/assets/slika-3.jpg";
 
 const offers = [
   {
