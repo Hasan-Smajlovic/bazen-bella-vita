@@ -66,7 +66,7 @@ const Navbar = () => {
             alt="Bazen Bella Vita Apartmani Logo"
             width={240}
             height={160}
-            className="w-[90px] h-[60px] sm:w-[108px] sm:h-[72px] md:w-[126px] md:h-[84px]"
+            className="w-[64px] h-[48px] sm:w-[88px] sm:h-[60px] md:w-[104px] md:h-[70px]"
           />
         </a>
 

@@ -1,43 +1,43 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import gallery1 from "@/assets/slika-1.jpg";
-import gallery4 from "@/assets/slika-2.jpg";
-import offerApartment from "@/assets/slika-3.jpg";
+import DnevniImg from "@/assets/slika-1.jpg";
+import CjelodnevniImg from "@/assets/slika-2.jpg";
+import NocniImg from "@/assets/slika-10-nocni.jpg";
 
 const offers = [
   {
-    title: "Cjelodnevna karta",
+    title: "Dnevni odmor paket",
     description: "Pristup bazenu cijeli dan + ležaljka i suncobran.",
     priceAdult: "15 KM",
-    priceChild: "8 KM",
-    badge: "Porodično",
+    priceChild: "Besplatno",
+    badge: "Odmor za dan",
     badgeColor: "bg-primary text-primary-foreground",
-    image: gallery1,
+    image: DnevniImg,
     features: ["Pristup bazenu", "Ležaljka", "Suncobran", "Tuš"],
   },
   {
-    title: "Vikend Relax Paket",
+    title: "Cjelodnevni odmor paket",
     description:
       "2-dnevni pristup bazenu sa svim pogodnostima po sniženoj cijeni.",
     priceAdult: "25 KM",
-    priceChild: "14 KM",
+    priceChild: "Besplatno",
     oldPrice: "30 KM",
-    badge: "Najpopularnije",
+    badge: "Najpopularnija ponuda",
     badgeColor: "bg-accent text-accent-foreground",
-    image: gallery4,
+    image: CjelodnevniImg,
     features: ["2 dana pristupa", "Ležaljka", "Suncobran", "Pool bar popust"],
     popular: true,
   },
   {
-    title: "Apartman + Pool Paket",
+    title: "Nocni odmor paket",
     description:
       "2–5 dana boravka u luksuznom apartmanu + neograničen pristup bazenu.",
     priceAdult: "120 KM",
-    priceChild: null,
+    priceChild: "Besplatno",
     oldPrice: "160 KM",
-    badge: "Akcija",
+    badge: "Odmor za noć",
     badgeColor: "bg-secondary text-secondary-foreground",
-    image: offerApartment,
+    image: NocniImg,
     features: ["Apartman smještaj", "Neograničen bazen", "Parking", "Doručak"],
   },
 ];
