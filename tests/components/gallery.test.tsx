@@ -16,10 +16,10 @@ describe("Gallery", () => {
     );
 
     expect(screen.getByTitle("Zatvori galeriju")).toBeInTheDocument();
-    expect(screen.getByText(/1\s*\/\s*12/)).toBeInTheDocument();
+    expect(screen.getByText(/1\s*\/\s*17/)).toBeInTheDocument();
 
     fireEvent.keyDown(window, { key: "ArrowRight" });
-    expect(screen.getByText(/2\s*\/\s*12/)).toBeInTheDocument();
+    expect(screen.getByText(/2\s*\/\s*17/)).toBeInTheDocument();
 
     fireEvent.click(screen.getByTitle("Zatvori galeriju"));
     expect(screen.queryByTitle("Zatvori galeriju")).not.toBeInTheDocument();
