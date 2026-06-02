@@ -4,7 +4,7 @@ import {
   Clock,
   Facebook,
   Instagram,
-  MessageCircle,
+  MessageSquareText,
   Phone,
   Users,
 } from "lucide-react";
@@ -13,7 +13,7 @@ const reservationItems = [
   { label: "Ime i prezime", icon: Users },
   { label: "Broj telefona", icon: Phone },
   { label: "Broj osoba", icon: Users },
-  { label: "Odabrani paket", icon: MessageCircle },
+  { label: "Odabrani paket", icon: MessageSquareText },
   { label: "Datum rezervacije", icon: CalendarDays },
   { label: "Trajanje boravka", icon: Clock },
 ];
@@ -31,8 +31,8 @@ const Reservation = () => {
               Rezervacija
             </span>
             <h2 className="mt-6 text-3xl md:text-5xl font-bold font-heading text-foreground">
-              Rezervišite svoje mjesto u našem{" "}
-              <span className="text-gradient">raju</span>
+              Rezervišite svoje mjesto u našoj{" "}
+              <span className="text-gradient">oazi</span>
             </h2>
             <p className="mt-6 text-muted-foreground max-w-2xl mx-auto lg:mx-0 text-lg leading-relaxed">
               Rezervacije primamo putem DM poruka na Instagramu i Facebooku.
@@ -75,11 +75,11 @@ const Reservation = () => {
             <div className="relative bg-card/90 backdrop-blur-sm rounded-3xl p-6 md:p-8 shadow-2xl border border-border/30">
               <div className="flex items-center gap-3 mb-6">
                 <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10">
-                  <MessageCircle className="h-5 w-5 text-primary" />
+                  <MessageSquareText className="h-5 w-5 text-primary" />
                 </span>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted-foreground">
-                    U poruci navedite sljedece informacije
+                    U poruci navedite sljedeće informacije
                   </p>
                 </div>
               </div>
@@ -107,8 +107,8 @@ const Reservation = () => {
                 <div className="flex items-center gap-3">
                   <span className="text-xl">💰</span>
                   <p className="text-foreground font-medium">
-                    Info o placanju dobijate u odgovoru na poruku. Dobro nam
-                    dosli!
+                    Info o plaćanju dobijate u odgovoru na poruku. Dobro nam
+                    došli!
                   </p>
                 </div>
               </div>

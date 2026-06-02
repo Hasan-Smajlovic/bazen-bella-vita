@@ -13,10 +13,10 @@ const Footer = () => {
   return (
     <footer className="bg-foreground text-primary-foreground">
       <div className="container mx-auto max-w-6xl py-12 px-4 md:px-8">
-        <div className="grid md:grid-cols-3 gap-8 mb-10">
+        <div className="grid md:grid-cols-3 gap-10 md:gap-8 mb-10 text-center md:text-left">
           {/* Brand */}
           <div>
-            <div className="flex items-start gap-4 mb-4">
+            <div className="flex flex-col items-center gap-3 mb-4 md:flex-row md:items-start md:gap-4">
               <img
                 src={LogoImg}
                 alt="logo"
@@ -24,7 +24,7 @@ const Footer = () => {
                 height={160}
                 className="w-[90px] h-[60px] sm:w-[108px] sm:h-[72px] md:w-[126px] md:h-[84px]"
               />
-              <span className="text-lg sm:text-xl font-bold font-heading">
+              <span className="text-lg sm:text-xl font-bold font-heading leading-tight">
                 Bazen Bella Vita Apartmani
               </span>
             </div>
@@ -38,8 +38,8 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-semibold mb-4">Radno vrijeme</h4>
             <ul className="space-y-2 text-sm text-primary-foreground/60">
-              <li>Ponedjeljak – Petak: 08:00 – 20:00</li>
-              <li>Subota – Nedjelja: 07:00 – 21:00</li>
+              <li>Ponedjeljak – Petak: 09:00 – 23:00</li>
+              <li>Subota – Nedjelja: 09:00 – 23:00</li>
               <li className="text-accent font-medium">
                 Sezona: Juni – Septembar
               </li>
@@ -50,20 +50,20 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-semibold mb-4">Kontakt</h4>
             <ul className="space-y-3 text-sm text-primary-foreground/60">
-              <li className="flex items-center gap-2">
+              <li className="flex items-center gap-2 justify-center md:justify-start">
                 <Phone className="w-4 h-4 text-primary-foreground/40" />
-                +387 36 123 456
+                +387 60 320 282 0
               </li>
-              <li className="flex items-center gap-2">
+              <li className="flex items-center gap-2 justify-center md:justify-start">
                 <Mail className="w-4 h-4 text-primary-foreground/40" />
-                info@bellavita.ba
+                bazenbellavita@gmail.com
               </li>
-              <li className="flex items-center gap-2">
+              <li className="flex items-center gap-2 justify-center md:justify-start">
                 <MapPin className="w-4 h-4 text-primary-foreground/40" />
                 Ulica bazena bb, 88000 Mostar
               </li>
             </ul>
-            <div className="flex gap-3 mt-4">
+            <div className="flex gap-3 mt-4 justify-center md:justify-start">
               <a
                 title="facebook"
                 href="https://www.facebook.com/profile.php?id=61579574523477"

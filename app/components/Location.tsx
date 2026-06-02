@@ -40,7 +40,7 @@ const Location = () => {
                 <div>
                   <p className="font-medium text-foreground">Adresa</p>
                   <p className="text-muted-foreground text-sm">
-                    Ulica bazena bb, 88000 Mostar, BiH
+                    Lukavica bb, Gračanica 75320, Bosna i Hercegovina
                   </p>
                 </div>
               </div>
@@ -51,7 +51,7 @@ const Location = () => {
                 <div>
                   <p className="font-medium text-foreground">Telefon</p>
                   <p className="text-muted-foreground text-sm">
-                    +387 36 123 456
+                    +387 60 320 282 0
                   </p>
                 </div>
               </div>
@@ -62,7 +62,7 @@ const Location = () => {
                 <div>
                   <p className="font-medium text-foreground">Email</p>
                   <p className="text-muted-foreground text-sm">
-                    info@aquarelax.ba
+                    bazenbellavita@gmail.com
                   </p>
                 </div>
               </div>
@@ -87,7 +87,7 @@ const Location = () => {
             </div>
 
             <a
-              href="https://maps.app.goo.gl/ATi9AVwXTrKEFuGy5"
+              href="https://www.google.com/maps/place/Bella+Vita/@44.7633733,18.1820665,131m/data=!3m1!1e3!4m6!3m5!1s0x475c290024ae7ab3:0x5764db55e88db858!8m2!3d44.763437!4d18.1816147!16s%2Fg%2F11xvb94r3m?entry=ttu&g_ep=EgoyMDI2MDUyNy4wIKXMDSoASAFQAw%3D%3D"
               target="_blank"
               rel="noopener noreferrer"
               className="mt-8"

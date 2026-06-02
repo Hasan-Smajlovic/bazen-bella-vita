@@ -46,7 +46,8 @@ const About = () => {
               Dimenzije bazena
             </h3>
             <p className="text-muted-foreground">
-              25m × 12m olimpijski bazen + dječiji bazen
+              800 x 600cm, dubina do 1.6m, idealno za plivanje i opuštanje.
+              Standardni porodični bazen.
             </p>
           </div>
           <div className="bg-card rounded-2xl p-8 shadow-card text-center hover:shadow-glow transition-shadow duration-500">
@@ -55,7 +56,7 @@ const About = () => {
               Temperatura vode
             </h3>
             <p className="text-muted-foreground">
-              26°C – 28°C tokom cijele sezone
+              22°C – 24°C tokom cijele sezone
             </p>
           </div>
           <div className="bg-card rounded-2xl p-8 shadow-card text-center hover:shadow-glow transition-shadow duration-500">
@@ -63,7 +64,7 @@ const About = () => {
             <h3 className="font-heading font-semibold text-foreground text-lg mb-2">
               Radno vrijeme
             </h3>
-            <p className="text-muted-foreground">Svakim danom 08:00 – 20:00</p>
+            <p className="text-muted-foreground">Svakim danom 09:00 – 23:00</p>
           </div>
         </div>
 

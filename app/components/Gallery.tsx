@@ -9,9 +9,14 @@ import gallery6 from "@/assets/slika-6.jpg";
 import gallery7 from "@/assets/slika-7.jpg";
 import gallery8 from "@/assets/slika-8.jpg";
 import gallery9 from "@/assets/slika-9.jpg";
+import gallery10 from "@/assets/slika-10-nocni.jpg";
+import gallery11 from "@/assets/slika-11.jpg";
+import gallery12 from "@/assets/slika-12.jpg";
+import gallery13 from "@/assets/slika-13.jpg";
 import video1 from "@/assets/video-1.mp4";
 import video2 from "@/assets/video-2.mp4";
 import video3 from "@/assets/video-3.mp4";
+import video4 from "@/assets/video-4.mp4";
 
 type MediaItem = {
   type: "image" | "video";
@@ -32,9 +37,15 @@ const mediaItems: MediaItem[] = [
     type: "video",
     src: video2,
     thumb: gallery2,
-    alt: "Video: Večernja atmosfera",
+    alt: "Video: Bazen i apartmani",
   },
-  { type: "video", src: video3, thumb: gallery3, alt: "Video: Pool bar" },
+  { type: "video", src: video3, thumb: gallery3, alt: "Video: Apartmani" },
+  {
+    type: "video",
+    src: video4,
+    thumb: gallery4,
+    alt: "Video: Pool bar",
+  },
 
   // Images
   { type: "image", src: gallery1, thumb: gallery1, alt: "Bazen" },
@@ -44,22 +55,61 @@ const mediaItems: MediaItem[] = [
     thumb: gallery2,
     alt: "Kristalno čista voda",
   },
-  { type: "image", src: gallery3, thumb: gallery3, alt: "Pool bar kokteli" },
-  { type: "image", src: gallery4, thumb: gallery4, alt: "Ležaljke uz bazen" },
-  { type: "image", src: gallery5, thumb: gallery5, alt: "Porodično kupanje" },
+  {
+    type: "image",
+    src: gallery3,
+    thumb: gallery3,
+    alt: "Apartmani s pogledom na bazen",
+  },
+  { type: "image", src: gallery4, thumb: gallery4, alt: "Apartmani i bazen" },
+  {
+    type: "image",
+    src: gallery11,
+    thumb: gallery11,
+    alt: "Pool bar",
+  },
+  {
+    type: "image",
+    src: gallery12,
+    thumb: gallery12,
+    alt: "Rostilj i svlacionica",
+  },
+  {
+    type: "image",
+    src: gallery13,
+    thumb: gallery13,
+    alt: "Pool bar i rostilj",
+  },
+  { type: "image", src: gallery10, thumb: gallery10, alt: "Noćno kupanje" },
+  {
+    type: "image",
+    src: gallery5,
+    thumb: gallery5,
+    alt: "Apartmani dnevna soba",
+  },
   {
     type: "image",
     src: gallery6,
     thumb: gallery6,
-    alt: "Zalazak sunca na bazenu",
+    alt: "Apartmani ulaz",
   },
-  { type: "image", src: gallery7, thumb: gallery7, alt: "Dječiji bazen" },
-  { type: "image", src: gallery8, thumb: gallery8, alt: "Večernja atmosfera" },
+  {
+    type: "image",
+    src: gallery7,
+    thumb: gallery7,
+    alt: "Apartmani spavaća soba",
+  },
+  {
+    type: "image",
+    src: gallery8,
+    thumb: gallery8,
+    alt: "Apartmani dječja soba",
+  },
   {
     type: "image",
     src: gallery9,
     thumb: gallery9,
-    alt: "Apartmani s pogledom na bazen",
+    alt: "Pogled na bazen iz apartmana",
   },
 ];
 
@@ -120,7 +170,7 @@ const Gallery = () => {
             Galerija
           </p>
           <h2 className="text-3xl md:text-5xl font-bold font-heading text-foreground mb-6">
-            Pogledajte naš <span className="text-gradient">raj</span>
+            Pogledajte našu <span className="text-gradient">oazu odmora</span>
           </h2>
         </div>
 
@@ -211,11 +261,11 @@ const Gallery = () => {
               muted
               playsInline
               onClick={(e) => e.stopPropagation()}
-              onLoadedMetadata={(e) => {
+              onLoadedMetadata={(event) => {
                 // ensure muted autoplay works; optionally set playbackRate
-                const v = e.currentTarget as HTMLVideoElement;
+                const video = event.currentTarget;
                 try {
-                  v.playbackRate = 1;
+                  video.playbackRate = 1;
                 } catch (err) {
                   // ignore
                 }

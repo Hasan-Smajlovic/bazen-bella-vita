@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ElementRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import logoImg from "@/assets/logo-transparent.webp";
@@ -14,7 +14,7 @@ const navLinks = [
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const mobileMenuRef = useRef<HTMLDivElement | null>(null);
+  const mobileMenuRef = useRef<ElementRef<"div"> | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -66,7 +66,7 @@ const Navbar = () => {
             alt="Bazen Bella Vita Apartmani Logo"
             width={240}
             height={160}
-            className="w-[64px] h-[48px] sm:w-[88px] sm:h-[60px] md:w-[104px] md:h-[70px]"
+            className="w-[64px] h-[56px] sm:w-[88px] sm:h-[76px] md:w-[104px] md:h-[88px]"
           />
         </a>
 

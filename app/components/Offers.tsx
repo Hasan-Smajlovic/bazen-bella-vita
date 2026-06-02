@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Flame } from "lucide-react";
 import DnevniImg from "@/assets/slika-1.jpg";
 import CjelodnevniImg from "@/assets/slika-2.jpg";
 import NocniImg from "@/assets/slika-10-nocni.jpg";
@@ -7,42 +8,94 @@ import NocniImg from "@/assets/slika-10-nocni.jpg";
 const offers = [
   {
     title: "Dnevni odmor paket",
-    description: "Pristup bazenu cijeli dan + ležaljka i suncobran.",
-    priceAdult: "15 KM",
-    priceChild: "Besplatno",
+    description: "Dnevni termin od 11:00 do 18:00 sa svim pogodnostima.",
+    priceLines: [
+      "Do 6 osoba: 150 KM - Promotivna cijena",
+      "Svaka dodatna osoba se naplacuje",
+    ],
+    childNote: "Djeca do 10 godina: Besplatno",
     badge: "Odmor za dan",
     badgeColor: "bg-primary text-primary-foreground",
     image: DnevniImg,
-    features: ["Pristup bazenu", "Ležaljka", "Suncobran", "Tuš"],
+    features: [
+      "Bazen",
+      "Parking",
+      "Svlačionica",
+      "Bar",
+      "Roštilj",
+      "Ležaljke",
+      "Suncobrani",
+    ],
   },
   {
     title: "Cjelodnevni odmor paket",
-    description:
-      "2-dnevni pristup bazenu sa svim pogodnostima po sniženoj cijeni.",
-    priceAdult: "25 KM",
-    priceChild: "Besplatno",
-    oldPrice: "30 KM",
+    description: "Cjelodnevni boravak uz nocenje u apartmanima.",
+    priceLines: [
+      "Do 6 osoba: 250 KM - Promotivna cijena",
+      "Max 12 osoba u dva apartmana",
+      "Dva apartmana: 400 KM",
+    ],
+
     badge: "Najpopularnija ponuda",
     badgeColor: "bg-accent text-accent-foreground",
     image: CjelodnevniImg,
-    features: ["2 dana pristupa", "Ležaljka", "Suncobran", "Pool bar popust"],
+    features: [
+      "Bazen",
+      "Parking",
+      "Svlačionica",
+      "Bar",
+      "Roštilj",
+      "Ležaljke",
+      "Suncobrani",
+      "Noćenje u apartmanima",
+    ],
     popular: true,
   },
   {
     title: "Nocni odmor paket",
-    description:
-      "2–5 dana boravka u luksuznom apartmanu + neograničen pristup bazenu.",
-    priceAdult: "120 KM",
-    priceChild: "Besplatno",
-    oldPrice: "160 KM",
+    description: "Nocni termin od 19:00 do 23:00.",
+    priceLines: [
+      "Nocni termin: 100 KM - Promotivna cijena",
+      "Svaki dodatni sat se dodatno naplacuje",
+    ],
+    childNote: "Djeca do 10 godina: Besplatno",
     badge: "Odmor za noć",
     badgeColor: "bg-secondary text-secondary-foreground",
     image: NocniImg,
-    features: ["Apartman smještaj", "Neograničen bazen", "Parking", "Doručak"],
+    features: [
+      "Bazen",
+      "Parking",
+      "Svlačionica",
+      "Bar",
+      "Roštilj",
+      "Ležaljke",
+      "Ambijentalna rasvjeta",
+    ],
   },
 ];
 
 const Offers = () => {
+  const renderPriceLine = (line: string, isPopular?: boolean) => {
+    const promoText = "Promotivna cijena";
+    const promoIndex = line.indexOf(promoText);
+
+    if (promoIndex === -1) {
+      return line;
+    }
+
+    const before = line.slice(0, promoIndex);
+    const after = line.slice(promoIndex + promoText.length);
+    const promoClass = isPopular ? "text-accent" : "text-primary";
+
+    return (
+      <>
+        {before}
+        <span className={promoClass}>{promoText}</span>
+        {after}
+      </>
+    );
+  };
+
   return (
     <section id="offers" className="section-padding water-shimmer">
       <div className="container mx-auto max-w-6xl">
@@ -77,7 +130,14 @@ const Offers = () => {
                 <Badge
                   className={`absolute top-4 right-4 ${offer.badgeColor} rounded-full px-3 py-1 text-xs font-semibold border-0`}
                 >
-                  {offer.badge}
+                  {offer.popular ? (
+                    <span className="inline-flex items-center gap-1">
+                      <Flame className="h-3.5 w-3.5" />
+                      {offer.badge}
+                    </span>
+                  ) : (
+                    offer.badge
+                  )}
                 </Badge>
               </div>
 
@@ -105,24 +165,21 @@ const Offers = () => {
 
                 {/* Price */}
                 <div className="mt-auto">
-                  <div className="flex items-end gap-2 mb-4">
-                    {offer.oldPrice && (
-                      <span className="text-muted-foreground line-through text-sm">
-                        {offer.oldPrice}
-                      </span>
+                  <div className="space-y-2 mb-4">
+                    {offer.priceLines.map((line) => (
+                      <p
+                        key={line}
+                        className="text-sm text-foreground font-semibold"
+                      >
+                        {renderPriceLine(line, offer.popular)}
+                      </p>
+                    ))}
+                    {offer.childNote && (
+                      <p className="text-sm text-muted-foreground">
+                        {offer.childNote}
+                      </p>
                     )}
-                    <span className="text-2xl font-bold text-foreground">
-                      {offer.priceAdult}
-                    </span>
-                    <span className="text-muted-foreground text-sm">
-                      / odrasli
-                    </span>
                   </div>
-                  {offer.priceChild && (
-                    <p className="text-sm text-muted-foreground mb-4">
-                      Djeca: {offer.priceChild}
-                    </p>
-                  )}
                   <a href="#reservation">
                     <Button
                       variant={offer.popular ? "accent" : "default"}
@@ -135,6 +192,22 @@ const Offers = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className="mt-12 bg-card/60 border border-border/60 rounded-3xl p-6 md:p-8 text-center">
+          <p className="text-foreground font-heading font-semibold text-xl mb-2">
+            Paket po želji
+          </p>
+          <p className="text-muted-foreground max-w-2xl mx-auto mb-6">
+            Ako vam ne odgovara neki od ovih paketa, cijene nisu fiksne i uvijek
+            smo otvoreni za dogovor. U slučaju da želite više dana, više osoba
+            ili dodatne sate, rado ćemo prilagoditi ponudu po vašoj želji.
+          </p>
+          <a href="#reservation">
+            <Button variant="accent" className="rounded-full">
+              Napravite svoj paket
+            </Button>
+          </a>
         </div>
       </div>
     </section>
