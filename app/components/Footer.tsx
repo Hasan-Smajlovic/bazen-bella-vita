@@ -60,7 +60,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2 justify-center md:justify-start">
                 <MapPin className="w-4 h-4 text-primary-foreground/40" />
-                Ulica bazena bb, 88000 Mostar
+                Lukavica bb, Gračanica 75320, Bosna i Hercegovina
               </li>
             </ul>
             <div className="flex gap-3 mt-4 justify-center md:justify-start">
