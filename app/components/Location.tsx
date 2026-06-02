@@ -5,7 +5,7 @@ const Location = () => {
   return (
     <section id="contact" className="section-padding bg-background">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16">
           <p className="text-accent font-semibold tracking-widest uppercase text-sm mb-3">
             Lokacija
           </p>
@@ -14,9 +14,9 @@ const Location = () => {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
+        <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
           {/* Map */}
-          <div className="rounded-3xl overflow-hidden shadow-card h-80 md:h-auto min-h-[320px]">
+          <div className="w-full max-w-[560px] mx-auto md:mx-0 md:max-w-none rounded-3xl overflow-hidden shadow-card h-72 sm:h-80 md:h-auto min-h-[280px] sm:min-h-[320px]">
             <iframe
               title="Lokacija bazena"
               src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d20715.21336074374!2d18.16065523476563!3d44.76348010000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDTCsDQ1JzQ4LjUiTiAxOMKwMTAnNTIuNSJF!5e0!3m2!1sbs!2sba!4v1771831658184!5m2!1sbs!2sba"
@@ -28,8 +28,8 @@ const Location = () => {
           </div>
 
           {/* Contact info */}
-          <div className="bg-card rounded-3xl p-8 md:p-10 shadow-card flex flex-col justify-center">
-            <h3 className="font-heading font-bold text-2xl text-foreground mb-8">
+          <div className="w-full max-w-[560px] mx-auto md:mx-0 md:max-w-none bg-card rounded-3xl p-6 sm:p-8 md:p-10 shadow-card flex flex-col justify-center">
+            <h3 className="font-heading font-bold text-2xl text-foreground mb-6 sm:mb-8">
               Kontakt informacije
             </h3>
             <div className="space-y-6">

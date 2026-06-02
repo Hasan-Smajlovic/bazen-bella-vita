@@ -165,7 +165,7 @@ const Gallery = () => {
   return (
     <section id="gallery" className="section-padding bg-background">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 sm:mb-12 md:mb-16">
           <p className="text-accent font-semibold tracking-widest uppercase text-sm mb-3">
             Galerija
           </p>
@@ -174,7 +174,7 @@ const Gallery = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
           {previewImages.map((item, i) => (
             <button
               key={i}
@@ -205,15 +205,15 @@ const Gallery = () => {
 
           <button
             onClick={() => openLightbox(0)}
-            className="relative group overflow-hidden rounded-2xl aspect-[4/3] border border-accent/70 bg-gradient-to-br from-accent/15 via-background to-primary/15 p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-accent"
+            className="relative group col-span-2 sm:col-span-1 overflow-hidden rounded-2xl aspect-[4/3] border border-accent/70 bg-gradient-to-br from-accent/15 via-background to-primary/15 p-4 sm:p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-accent"
             title="Pogledaj ostale slike"
             aria-label="Pogledaj ostale slike"
           >
-            <div className="flex h-full flex-col items-center justify-center gap-3">
-              <p className="text-lg font-bold leading-snug text-foreground">
+            <div className="flex h-full flex-col items-center justify-center gap-2 sm:gap-3">
+              <p className="text-base sm:text-lg font-bold leading-snug text-foreground">
                 Pogledaj ostale slike
               </p>
-              <ArrowRight className="w-10 h-10 text-accent transition-transform duration-300 group-hover:translate-x-1" />
+              <ArrowRight className="w-8 h-8 sm:w-10 sm:h-10 text-accent transition-transform duration-300 group-hover:translate-x-1" />
             </div>
             <div className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-accent/15" />
           </button>
