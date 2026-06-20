@@ -138,7 +138,7 @@ function FlipCard({ item }: { item: Amenity }) {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    if (!("matchMedia" in window)) {
+    if (typeof window.matchMedia !== "function") {
       // JSDOM/testing environment doesn't implement matchMedia — disable flip
       setEnabled(false);
       return;
