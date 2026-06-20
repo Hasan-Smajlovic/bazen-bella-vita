@@ -138,6 +138,11 @@ function FlipCard({ item }: { item: Amenity }) {
 
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (!("matchMedia" in window)) {
+      // JSDOM/testing environment doesn't implement matchMedia — disable flip
+      setEnabled(false);
+      return;
+    }
     const mq: MediaQueryList = window.matchMedia("(min-width: 768px)");
     const handleChange = (e: MediaQueryListEvent) => {
       const isMdUp = e.matches;
