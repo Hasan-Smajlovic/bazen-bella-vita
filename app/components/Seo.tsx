@@ -44,7 +44,9 @@ export default function Seo({ title, description, url, image }: Props) {
 
     // canonical
     if (url) {
-      let link = document.querySelector("link[rel=canonical]") as HTMLLinkElement | null;
+      let link = document.querySelector(
+        "link[rel=canonical]",
+      ) as HTMLLinkElement | null;
       if (!link) {
         link = document.createElement("link");
         link.rel = "canonical";

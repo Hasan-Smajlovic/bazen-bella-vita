@@ -95,7 +95,7 @@ const About = () => {
               Temperatura vode
             </h3>
             <p className="text-muted-foreground">
-              22°C – 24°C tokom cijele sezone
+              22°C – 27°C tokom cijele sezone
             </p>
           </div>
           <div className="bg-card rounded-2xl p-6 sm:p-8 shadow-card text-center hover:shadow-glow transition-shadow duration-500">
