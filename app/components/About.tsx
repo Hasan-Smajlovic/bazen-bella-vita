@@ -10,6 +10,7 @@ import {
   Armchair,
   BedDouble,
   Wifi,
+  HeartHandshake,
 } from "lucide-react";
 
 type IconType = ComponentType<SVGProps<SVGSVGElement>>;
@@ -78,7 +79,7 @@ const About = () => {
         </div>
 
         {/* Info cards  */}
-        <div className="grid md:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16">
+        <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12 sm:mb-16">
           <div className="bg-card rounded-2xl p-6 sm:p-8 shadow-card text-center hover:shadow-glow transition-shadow duration-500">
             <Waves className="w-10 h-10 text-primary mx-auto mb-4" />
             <h3 className="font-heading font-semibold text-foreground text-lg mb-2">
@@ -104,6 +105,16 @@ const About = () => {
               Radno vrijeme
             </h3>
             <p className="text-muted-foreground">Svakim danom 09:00 – 23:00</p>
+          </div>
+          <div className="bg-card rounded-2xl p-6 sm:p-8 shadow-card text-center hover:shadow-glow transition-shadow duration-500">
+            <HeartHandshake className="w-10 h-10 text-primary mx-auto mb-4" />
+            <h3 className="font-heading font-semibold text-foreground text-lg mb-2">
+              Hijab Friendly
+            </h3>
+            <p className="text-muted-foreground">
+              Bazen je ograđen i pruža ugodan i privatan ambijent, te je
+              dobrodošao svim gostima koji nose hidžab.
+            </p>
           </div>
         </div>
 

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight, ArrowRight, X, Play } from "lucide-react";
 import gallery1 from "@/assets/slika-1.jpg";
 import gallery2 from "@/assets/slika-2.jpg";
@@ -117,34 +117,44 @@ const previewImages = mediaItems.slice(0, 8);
 
 const Gallery = () => {
   const [lightbox, setLightbox] = useState<number | null>(null);
+  const stripRef = useRef<HTMLDivElement>(null);
+  const touchStartX = useRef<number | null>(null);
+
+  // Lock body scroll when lightbox is open
+  useEffect(() => {
+    if (lightbox !== null) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [lightbox]);
 
   useEffect(() => {
+    if (lightbox === null || !stripRef.current) return;
+    const strip = stripRef.current;
+    const thumb = strip.children[lightbox] as HTMLElement | undefined;
+    if (!thumb) return;
+    const scrollTarget =
+      thumb.offsetLeft - strip.offsetWidth / 2 + thumb.offsetWidth / 2;
+    if (typeof strip.scrollTo === "function") {
+      strip.scrollTo({ left: scrollTarget, behavior: "smooth" });
+    } else {
+      strip.scrollLeft = scrollTarget;
+    }
+  }, [lightbox]);
+
+  // Keyboard navigation
+  useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (lightbox === null) {
-        return;
-      }
-
-      if (event.key === "Escape") {
-        setLightbox(null);
-      }
-
-      if (event.key === "ArrowLeft") {
-        setLightbox((current) =>
-          current === null
-            ? null
-            : (current - 1 + mediaItems.length) % mediaItems.length,
-        );
-      }
-
-      if (event.key === "ArrowRight") {
-        setLightbox((current) =>
-          current === null ? null : (current + 1) % mediaItems.length,
-        );
-      }
+      if (lightbox === null) return;
+      if (event.key === "Escape") setLightbox(null);
+      if (event.key === "ArrowLeft") showPrevious();
+      if (event.key === "ArrowRight") showNext();
     };
-
     window.addEventListener("keydown", handleKeyDown);
-
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [lightbox]);
 
@@ -160,6 +170,20 @@ const Gallery = () => {
     setLightbox((current) =>
       current === null ? null : (current + 1) % mediaItems.length,
     );
+  };
+
+  // Touch swipe to navigate images
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const diff = touchStartX.current - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) showNext();
+      else showPrevious();
+    }
+    touchStartX.current = null;
   };
 
   return (
@@ -223,83 +247,94 @@ const Gallery = () => {
       {/* Lightbox */}
       {lightbox !== null && (
         <div
-          className="fixed inset-0 z-[100] bg-foreground/90 flex items-center justify-center p-4"
+          className="fixed inset-0 z-[100] bg-foreground/90 flex flex-col"
           onClick={() => setLightbox(null)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
-          <button
-            className="absolute top-6 right-6 text-primary-foreground/80 hover:text-primary-foreground transition-colors"
-            onClick={() => setLightbox(null)}
-            title="Zatvori galeriju"
-          >
-            <X className="w-8 h-8" />
-          </button>
-          <button
-            className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 rounded-full bg-card/15 p-3 text-primary-foreground transition-all duration-300 hover:bg-card/25 hover:scale-105"
-            onClick={(event) => {
-              event.stopPropagation();
-              showPrevious();
-            }}
-            aria-label="Prethodna slika"
-            title="Prethodna slika"
-          >
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          {mediaItems[lightbox].type === "image" ? (
-            <img
-              src={mediaItems[lightbox].src}
-              alt={mediaItems[lightbox].alt}
-              className="max-w-full max-h-[calc(100vh-230px)] sm:max-h-[calc(100vh-250px)] rounded-2xl object-contain animate-fade-in-up"
-              onClick={(e) => e.stopPropagation()}
-            />
-          ) : (
-            <video
-              src={mediaItems[lightbox].src}
-              poster={mediaItems[lightbox].thumb}
-              className="max-w-full max-h-[calc(100vh-230px)] sm:max-h-[calc(100vh-250px)] rounded-2xl object-contain animate-fade-in-up"
-              controls
-              autoPlay
-              muted
-              playsInline
-              onClick={(e) => e.stopPropagation()}
-              onLoadedMetadata={(event) => {
-                // ensure muted autoplay works; optionally set playbackRate
-                const video = event.currentTarget;
-                try {
-                  video.playbackRate = 1;
-                } catch (err) {
-                  // ignore
-                }
-              }}
-            />
-          )}
-          <button
-            className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 rounded-full bg-card/15 p-3 text-primary-foreground transition-all duration-300 hover:bg-card/25 hover:scale-105"
-            onClick={(event) => {
-              event.stopPropagation();
-              showNext();
-            }}
-            aria-label="Sljedeća slika"
-            title="Sljedeća slika"
-          >
-            <ChevronRight className="w-6 h-6" />
-          </button>
+          {/* Top bar: counter + close */}
+          <div className="flex items-center justify-between px-4 pt-4 pb-2 shrink-0">
+            <p className="text-[10px] sm:text-xs font-semibold text-primary-foreground/55">
+              {lightbox + 1} / {mediaItems.length}
+            </p>
+            <button
+              className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
+              onClick={() => setLightbox(null)}
+              title="Zatvori galeriju"
+            >
+              <X className="w-8 h-8" />
+            </button>
+          </div>
 
+          {/* Media area: flex-1 so it fills all space between top bar and strip */}
+          <div className="relative flex flex-1 items-center justify-center px-14 py-2 min-h-0">
+            <button
+              className="absolute left-2 md:left-6 rounded-full bg-card/15 p-3 text-primary-foreground transition-all duration-300 hover:bg-card/25 hover:scale-105"
+              onClick={(event) => {
+                event.stopPropagation();
+                showPrevious();
+              }}
+              aria-label="Prethodna slika"
+              title="Prethodna slika"
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            {mediaItems[lightbox].type === "image" ? (
+              <img
+                src={mediaItems[lightbox].src}
+                alt={mediaItems[lightbox].alt}
+                className="max-w-full max-h-full rounded-2xl object-contain animate-fade-in-up"
+                onClick={(e) => e.stopPropagation()}
+              />
+            ) : (
+              <video
+                src={mediaItems[lightbox].src}
+                poster={mediaItems[lightbox].thumb}
+                className="max-w-full max-h-full rounded-2xl object-contain animate-fade-in-up"
+                controls
+                autoPlay
+                muted
+                playsInline
+                onClick={(e) => e.stopPropagation()}
+                onLoadedMetadata={(event) => {
+                  const video = event.currentTarget;
+                  try {
+                    video.playbackRate = 1;
+                  } catch (err) {
+                    // ignore
+                  }
+                }}
+              />
+            )}
+
+            <button
+              className="absolute right-2 md:right-6 rounded-full bg-card/15 p-3 text-primary-foreground transition-all duration-300 hover:bg-card/25 hover:scale-105"
+              onClick={(event) => {
+                event.stopPropagation();
+                showNext();
+              }}
+              aria-label="Sljedeća slika"
+              title="Sljedeća slika"
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+          </div>
+
+          {/* Thumbnail strip: always at the bottom, never overlaps media */}
           <div
-            className="absolute bottom-1.5 left-1/2 w-[min(92vw,72rem)] -translate-x-1/2 rounded-xl bg-foreground/75 px-2 py-1.5 shadow-xl shadow-black/25 backdrop-blur-lg"
+            className="shrink-0 w-full bg-foreground/75 px-2 py-2 backdrop-blur-lg"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="mb-1.5 flex items-center justify-end">
-              <p className="text-[9px] sm:text-[10px] font-semibold text-primary-foreground/55">
-                {lightbox + 1} / {mediaItems.length}
-              </p>
-            </div>
-
-            <div className="lightbox-strip-scroll flex gap-2 overflow-x-auto pb-0.5 pr-1">
+            <div
+              ref={stripRef}
+              className="lightbox-strip-scroll flex gap-2 overflow-x-auto pb-0.5 pr-1"
+            >
               {mediaItems.map((item, index) => (
                 <button
                   key={`${item.alt}-${index}`}
                   onClick={() => setLightbox(index)}
-                  className={`group relative h-[68px] w-[120px] sm:h-14 sm:w-20 flex-none overflow-hidden rounded-md border transition-all duration-300 hover:-translate-y-0.5 ${
+                  className={`group relative h-[60px] w-[106px] sm:h-14 sm:w-20 flex-none overflow-hidden rounded-md border transition-all duration-300 hover:-translate-y-0.5 ${
                     index === lightbox
                       ? "border-primary ring-2 ring-primary/70"
                       : "border-white/10 hover:border-white/30"
